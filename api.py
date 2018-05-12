@@ -3,7 +3,7 @@ from discord.ext import commands
 import urllib.parse
 import requests
 import aiohttp
-
+import urbandictionary as ud
 
 
 class api:
@@ -11,6 +11,7 @@ class api:
         self.bot=bot
     @commands.command()
     async def google(self, query):
+        """Search Google Maps for info on a location"""
         g_api = "http://maps.googleapis.com/maps/api/geocode/json?"
         url = g_api + urllib.parse.urlencode({'address': query})
         json_data = requests.get(url).json()
@@ -24,15 +25,29 @@ class api:
         await self.bot.say(embed=info)
     @commands.command()
     async def cat(self):
+       """generate random cat image"""
        async with aiohttp.request('get', 'http://thecatapi.com/api/images/get?format=src') as resp:
             await self.bot.say(resp.url)
 
     @commands.command()
     async def dog(self):
+        """generate random dog image"""
         dog_api = "https://dog.ceo/api/breeds/image/random"
         json_data = requests.get(dog_api).json()
         dogimage = json_data['message']
         await self.bot.say(dogimage)
-    
+
+    @commands.command()
+    async def ud(self,word):
+        """Get Urban Dictionary defenition [beta]"""
+        defs = ud.define(word)
+        for d in defs:
+            await self.bot.say(d)
+    @commands.command()
+    async def udran(self):
+        """Get a random Urban Dictionary defenition [beta]"""
+        rand = ud.random()
+        for d in rand:
+            await self.bot.say(d)
 def setup(bot):
     bot.add_cog(api(bot))
