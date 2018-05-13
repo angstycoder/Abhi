@@ -7,7 +7,7 @@ from discord.ext import commands
 
 
 startup_extensions = ["guild", "RNG" , "ExampleRepl", "Utils" ,"api"]
-bot = commands.Bot(command_prefix='?', description="Nothing here")
+bot = commands.Bot(command_prefix='?a', description="Nothing here")
 
 #Get all the secret stuff
 with open('token.json') as secret:
@@ -16,7 +16,7 @@ with open('token.json') as secret:
 @bot.event
 async def on_ready():
     print("Logged in as Abhi")
-    await bot.change_presence(game=discord.Game(name='?help'))
+    await bot.change_presence(game=discord.Game(name='?ahelp'))
     #bot.load_extension("api")
     for extension in startup_extensions:
         try:
