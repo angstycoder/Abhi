@@ -3,9 +3,12 @@ from discord.ext import commands
 import urllib.parse
 import requests
 import aiohttp
+import random
 import urbandictionary as ud
-
-
+from imgurpython import ImgurClient
+client_id = '6eed8d788379758'
+client_secret = '2c161fd943f1cdbb373086f1b703477ede1230df'
+client = ImgurClient(client_id, client_secret)
 class api:
     def __init__(self, bot):
         self.bot=bot
@@ -49,5 +52,15 @@ class api:
         rand = ud.random()
         for d in rand:
             await self.bot.say(d)
+    @commands.command()
+    async def imgran(self):
+        """"Get a random imgur image"""
+        search="random"
+        search = client.gallery()
+        holder=[]
+        for d in search:
+            holder.append(d.link)
+        await self.bot.say(random.choice(holder))
+
 def setup(bot):
     bot.add_cog(api(bot))
