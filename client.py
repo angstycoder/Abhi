@@ -43,6 +43,10 @@ async def on_message(message):
 
         await asyncio.sleep(1)
         await client.edit_message(tp,'It is {}.'.format(ran()))
+    if message.content.startswith('>.<'):
+        await client.send_message(message.author,'Dont you dare!')
+        await client.add_reaction(message,'\N{THUMBS UP SIGN}')
+
 
 
 client.run(token)
