@@ -26,7 +26,8 @@ async def on_ready():
             print('Failed to load extension {}\n{}'.format(extension, exc))
 @bot.command(pass_context=True)
 async def channel(ctx,name):
-    await bot.create_channel(ctx.message.server, name, type=discord.ChannelType.text)
+    if ctx.message.author.server_permissions.administrator:
+        await bot.create_channel(ctx.message.server, name, type=discord.ChannelType.text)
 
 webhook_url = "https://discordapp.com/api/webhooks/444783912196112394/V7zgiXN86vGVpXOZBOKorJvTb9LL8ZTORIUbwMmVnlxrHKSFam9H1VyJcDkxQRvrqVLW"
 agent = "discord"
