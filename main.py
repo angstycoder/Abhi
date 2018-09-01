@@ -4,7 +4,7 @@ import json
 import logging
 from DiscordHandler import DiscordHandler
 from discord.ext import commands
-
+import os
 
 startup_extensions = ["guild", "RNG" , "ExampleRepl", "Utils" ,"api"]
 bot = commands.Bot(command_prefix='?a ', description="Nothing here")
@@ -52,4 +52,4 @@ logger.addHandler(stream_handler)
 
 
 
-bot.run(token)
+bot.run(os.environ['TOKEN']))
